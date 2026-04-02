@@ -1,620 +1,302 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MM-SFD: Narrative-Aware Recommendation</title>
-
+  <title>MM-SFD: Welcome</title>
   <link rel="icon" href="./static/images/mmsfd_favicon.png">
-
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
-
-  <link rel="stylesheet" href="./static/css/bulma.min.css">
-  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
-  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
-  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/index.css">
-  <link rel="stylesheet" href="./static/css/leaderboard.css">
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script defer src="./static/js/fontawesome.all.min.js"></script>
-  <script src="./static/js/bulma-carousel.min.js"></script>
-  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 
   <style>
-    .method-tag {
-      display: inline-block;
-      padding: 2px 10px;
-      border-radius: 12px;
-      font-size: 12px;
-      font-weight: 600;
-      margin-left: 6px;
+    @font-face {
+      font-family: 'CustomFont';
+      src: url('./static/NanumBrushScript-Regular.ttf') format('truetype');
     }
-    .tag-retrieval { background-color: #d4edda; color: #155724; }
-    .tag-generative { background-color: #fdf2e9; color: #8b6914; }
-    .contribution-box {
-      background: #f8f6f3;
-      border-left: 4px solid #c49a6c;
-      padding: 16px 20px;
-      margin: 10px 0;
-      border-radius: 0 8px 8px 0;
-    }
-    .pipeline-step {
-      background: #f8f9fa;
-      border: 1px solid #e9ecef;
-      border-radius: 12px;
-      padding: 20px;
-      margin: 10px 0;
-      text-align: center;
-    }
-    .pipeline-step h4 {
-      color: #2c3e50;
-      margin-bottom: 8px;
-    }
-    .stat-card {
-      background: white;
-      border-radius: 12px;
-      padding: 20px;
-      text-align: center;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-    .stat-card .stat-number {
-      font-size: 2em;
-      font-weight: bold;
-      color: #c49a6c;
-    }
-    .stat-card .stat-label {
-      font-size: 0.9em;
-      color: #666;
-    }
-    .insight-box {
-      background-color: #f8f6f3;
-      border-left: 4px solid #c49a6c;
-      padding: 12px 16px;
-      margin: 12px 0;
-      border-radius: 0 8px 8px 0;
-    }
-    .section-divider {
-      height: 3px;
-      background: #2c3e50;
-      border: none;
-      margin: 0;
-    }
-    table.results-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 14px;
-    }
-    table.results-table th {
-      background-color: #2c3e50;
-      color: white;
-      padding: 10px 8px;
-      text-align: center;
-    }
-    table.results-table td {
-      padding: 8px;
-      text-align: center;
-      border-bottom: 1px solid #eee;
-    }
-    table.results-table tr:hover {
-      background-color: #f5f0eb;
-    }
-    .row-retrieval { background-color: #d4edda22; }
-    .row-generative { background-color: #fdf2e922; }
-    .row-header-retrieval { background-color: #d4edda !important; }
-    .row-header-generative { background-color: #fdf2e9 !important; }
-  </style>
 
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      overflow: hidden;
+      width: 100vw;
+      height: 100vh;
+      background: #111;
+      cursor: pointer;
+    }
+
+    /* ── Background: slow vertical scroll ── */
+    .bg-scroll {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 300vh;
+      background-image: url('background_crossv3.png');
+      background-size: cover;
+      background-position: center top;
+      z-index: 0;
+      will-change: transform;
+    }
+
+    /* ── Dark cinematic overlay ── */
+    .overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: linear-gradient(
+        180deg,
+        rgba(20,24,30,0.75) 0%,
+        rgba(20,24,30,0.50) 40%,
+        rgba(20,24,30,0.50) 60%,
+        rgba(20,24,30,0.80) 100%
+      );
+      z-index: 1;
+    }
+
+    /* ── Film grain scanlines ── */
+    .grain {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 5;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 1px,
+        rgba(0,0,0,0.04) 1px,
+        rgba(0,0,0,0.04) 2px
+      );
+    }
+
+    /* ── Letterbox cinematic bars ── */
+    .letterbox-top, .letterbox-bottom {
+      position: fixed;
+      left: 0;
+      width: 100%;
+      height: 8vh;
+      background: #111;
+      z-index: 6;
+    }
+    .letterbox-top { top: 0; }
+    .letterbox-bottom { bottom: 0; }
+
+    /* ── Center content ── */
+    .center-stage {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 3;
+    }
+
+    /* ── Title ── */
+    .logo {
+      font-family: 'CustomFont', 'Google Sans', sans-serif;
+      font-size: 16vw;
+      font-weight: bold;
+      letter-spacing: 0.03em;
+      line-height: 1;
+      text-shadow:
+        0 0 80px rgba(196, 154, 108, 0.25),
+        0 4px 30px rgba(0,0,0,0.6);
+      overflow: hidden;
+    }
+    .logo .mm  { color: #e8e0d6; display: inline-block; opacity: 0; }
+    .logo .dash { color: #6a7a8a; display: inline-block; opacity: 0; }
+    .logo .sfd  { color: #c49a6c; display: inline-block; opacity: 0; }
+
+    /* ── Decorative line ── */
+    .line-reveal {
+      width: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #c49a6c, transparent);
+      margin: 2.5vh 0;
+    }
+
+    /* ── Subtitle ── */
+    .subtitle-line {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 2vw;
+      color: rgba(255,255,255,0.7);
+      text-align: center;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.6);
+      opacity: 0;
+      letter-spacing: 0.04em;
+    }
+    .subtitle-line.small {
+      font-size: 1.5vw;
+      color: rgba(255,255,255,0.45);
+      margin-top: 0.8vh;
+    }
+
+    /* ── Badge ── */
+    .conference-badge {
+      margin-top: 3.5vh;
+      padding: 8px 32px;
+      border: 1px solid rgba(196, 154, 108, 0.35);
+      border-radius: 30px;
+      color: #c49a6c;
+      font-family: 'Google Sans', sans-serif;
+      font-size: 1vw;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      background: rgba(196, 154, 108, 0.06);
+      opacity: 0;
+    }
+
+    /* ── Click prompt ── */
+    .please-click {
+      position: fixed;
+      bottom: 11vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 7;
+      opacity: 0;
+    }
+    .please-click span {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 0.9em;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(6px); }
+    }
+    .arrow-down {
+      margin-top: 10px;
+      font-size: 1.6em;
+      color: rgba(196, 154, 108, 0.6);
+      animation: float 2s ease-in-out infinite;
+    }
+
+    /* ── Vignette ── */
+    .vignette {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 4;
+      background: radial-gradient(
+        ellipse at center,
+        transparent 50%,
+        rgba(10,12,16,0.6) 100%
+      );
+    }
+  </style>
 </head>
 <body>
 
-<nav class="navbar" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
-  </div>
-  <div class="navbar-menu">
-    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+  <script>
+    document.addEventListener('click', function() {
+      // Cinematic fade-out before navigating
+      gsap.to('.center-stage, .please-click', {
+        opacity: 0, duration: 0.4, ease: "power2.in"
+      });
+      gsap.to('.letterbox-top', {
+        height: '50vh', duration: 0.8, ease: "power2.inOut"
+      });
+      gsap.to('.letterbox-bottom', {
+        height: '50vh', duration: 0.8, ease: "power2.inOut",
+        onComplete: function() {
+          window.location.href = 'home_page.html';
+        }
+      });
+    });
+  </script>
+
+  <!-- Background image with vertical scroll -->
+  <div class="bg-scroll"></div>
+
+  <!-- Dark overlay -->
+  <div class="overlay"></div>
+
+  <!-- Vignette -->
+  <div class="vignette"></div>
+
+  <!-- Film grain -->
+  <div class="grain"></div>
+
+  <!-- Letterbox bars -->
+  <div class="letterbox-top"></div>
+  <div class="letterbox-bottom"></div>
+
+  <!-- Main content -->
+  <div class="center-stage">
+    <div class="logo">
+      <span class="mm">MM</span><span class="dash">-</span><span class="sfd">SFD</span>
     </div>
+    <div class="line-reveal"></div>
+    <div class="subtitle-line">Towards Narrative-Aware Recommendation</div>
+    <div class="subtitle-line small">A Multimodal Dataset for Short-Form Dramas</div>
+    <div class="conference-badge">ACM MULTIMEDIA 2026</div>
   </div>
-</nav>
 
-
-<!-- ====== HERO SECTION ====== -->
-<section class="hero">
-  <div class="hero-body">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title is-bold">
-            <span style="vertical-align: middle">
-              <span style="color:#2c3e50;">MM</span>-<span style="color:#c49a6c;">SFD</span>
-            </span>
-          </h1>
-
-          <h2 class="subtitle is-3 publication-subtitle" style="margin-bottom: 20px;">
-            Towards Narrative-Aware Recommendation: <br>
-            A Multimodal Dataset for Short-Form Dramas
-          </h2>
-
-          <div class="is-size-5 publication-authors" style="margin-bottom: 20px;">
-            <span class="author-block">ACM Multimedia 2026</span>
-          </div>
-
-          <div class="column has-text-centered">
-            <div class="publication-links">
-              <!-- Code Link -->
-              <span class="link-block">
-                <a href="#"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fab fa-github"></i>
-                  </span>
-                  <span>GitHub</span>
-                </a>
-              </span>
-              <!-- HuggingFace Link -->
-              <span class="link-block">
-                <a href="#"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                    <p style="font-size:18px">🤗</p>
-                  </span>
-                  <span>HuggingFace</span>
-                </a>
-              </span>
-              <!-- Submit Results Link -->
-              <span class="link-block">
-                <a href="mailto:mmsfd-benchmark@gmail.com"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                    <p style="font-size:18px">✉️</p>
-                  </span>
-                  <span>Submit Results</span>
-                </a>
-              </span>
-              <!-- Benchmark Link -->
-              <span class="link-block">
-                <a href="#benchmark"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <p style="font-size:18px">🏆</p>
-                  </span>
-                  <span>Leaderboard</span>
-                </a>
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+  <!-- Click prompt -->
+  <div class="please-click">
+    <span>Click to enter</span>
+    <div class="arrow-down">&#x25BE;</div>
   </div>
-</section>
 
+  <script>
+    // ── Slow vertical background scroll ──
+    gsap.to('.bg-scroll', {
+      y: '-60vh',
+      duration: 30,
+      ease: 'none',
+      repeat: -1,
+      yoyo: true
+    });
 
-<!-- ====== ABSTRACT ====== -->
-<section class="section">
-  <div class="container" style="margin-bottom: 2vh;">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract</h2>
-        <div class="content has-text-justified">
-          <p>
-            Recent recommender systems are largely built upon user interaction data, focusing on personalized preference modeling over independent items. However, such paradigms are not well-suited for <b>short-form dramas</b>, where the goal is to seamlessly continue narrative-driven content rather than optimize for user-specific choices. This calls for a shift from <em>user-centric recommendation</em> to <em>narrative-aware content continuation</em>, enabling users to be directly presented with the next coherent episode without manual search.
-          </p>
-          <p>
-            To this end, we introduce <b>MM-SFD</b>, a novel multimodal dataset for narrative-aware recommendation in short-form dramas. Unlike existing datasets, our dataset is <b>user-agnostic</b> and models intrinsic narrative coherence by capturing structured relationships between consecutive clips. It provides rich multimodal signals, including <b>video, text, and metadata</b>, along with ground-truth next-episode annotations derived from the original storyline. We further define a <b>narrative continuation task</b> and establish benchmark settings with representative baselines covering retrieval and generative paradigms. We believe this dataset opens a new direction for narrative-aware recommendation in emerging episodic content scenarios.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+    // ── Cinematic entrance sequence ──
 
+    // 1. Title letters rise in with blur
+    gsap.to('.logo .mm', {
+      opacity: 1, y: 0, duration: 1.4, delay: 0.6,
+      ease: "power3.out",
+      startAt: { y: 60, opacity: 0 }
+    });
+    gsap.to('.logo .dash', {
+      opacity: 1, scaleX: 1, duration: 0.6, delay: 1.2,
+      ease: "power2.out",
+      startAt: { scaleX: 0, opacity: 0 }
+    });
+    gsap.to('.logo .sfd', {
+      opacity: 1, y: 0, duration: 1.4, delay: 0.9,
+      ease: "power3.out",
+      startAt: { y: -60, opacity: 0 }
+    });
 
-<!-- ====== KEY CONTRIBUTIONS ====== -->
-<hr class="section-divider">
-<section class="section">
-  <div class="container">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3"><span style="color:#2c3e50;">Key</span> <span style="color:#c49a6c;">Contributions</span></h2>
-        <div class="content has-text-justified">
-          <div class="contribution-box">
-            <b>1. Novel Multimodal Dataset</b> &mdash; We introduce the first user-agnostic multimodal dataset that explicitly models narrative continuity for short-form dramas, with 250,000+ ground-truth continuation pairs.
-          </div>
-          <div class="contribution-box">
-            <b>2. Comprehensive Data Pipeline</b> &mdash; A multi-stage construction pipeline integrating keyframe extraction, VAD-filtered ASR transcription, and multi-agent narrative distillation (Qwen3-32B + Gemini 3.1).
-          </div>
-          <div class="contribution-box">
-            <b>3. Benchmark & Insights</b> &mdash; A systematic benchmark covering lexical retrieval (BM25), dense retrieval, and generative recommendation under text-only, vision-only, and multimodal settings.
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+    // 2. Decorative line wipes open
+    gsap.to('.line-reveal', {
+      width: '28vw', duration: 1.2, delay: 2.0,
+      ease: "power2.inOut"
+    });
 
+    // 3. Subtitles fade in softly
+    gsap.to('.subtitle-line', {
+      opacity: 1, y: 0, duration: 1.0, delay: 2.4,
+      stagger: 0.3, ease: "power2.out",
+      startAt: { y: 20 }
+    });
 
-<!-- ====== PARADIGM COMPARISON ====== -->
-<section class="section" style="background-color: #f8f9fa;">
-  <div class="container">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3"><span style="color:#2c3e50;">Paradigm</span> <span style="color:#c49a6c;">Shift</span></h2>
-        <p class="subtitle" style="margin-bottom: 20px;">From user-centric matching to narrative-aware continuation</p>
-        <div class="content has-text-centered">
-          <img src="static/images/exp_results/intro-paras.jpg" alt="Paradigm Comparison" style="max-width: 85%; border-radius: 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.1);"/>
-          <p style="text-align: center; margin-top: 16px; max-width: 70%; margin-left: auto; margin-right: auto; color: #666;">
-            <b>Left:</b> Traditional recommendation relies on sparse user history for personalized matching, often producing disjointed results.
-            <b>Right:</b> Our narrative-aware approach ingests the full video context and models intrinsic plot logic through multimodal signals, decoding a coherent successor segment.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+    // 4. Badge
+    gsap.to('.conference-badge', {
+      opacity: 1, duration: 0.8, delay: 3.2,
+      ease: "power2.out"
+    });
 
-
-<!-- ====== DATASET SECTION ====== -->
-<hr class="section-divider">
-<section class="hero is-light is-small">
-  <div class="hero-body has-text-centered">
-    <h1 class="title is-1 publication-title is-bold">
-      <span style="color:#2c3e50;">MM</span>-<span style="color:#c49a6c;">SFD</span> Dataset
-    </h1>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths" style="width: 100%;">
-
-        <!-- Pipeline -->
-        <h2 class="title is-3"><span style="color:#2c3e50;">Construction</span> <span style="color:#c49a6c;">Pipeline</span></h2>
-        <div class="content has-text-centered">
-          <img src="static/images/exp_results/datasets.png" alt="Dataset Pipeline" style="max-width: 90%; border-radius: 8px;"/>
-          <p style="text-align: center; margin-top: 16px; max-width: 70%; margin-left: auto; margin-right: auto;">
-            The multi-stage pipeline: <b>(a)</b> Keyframe sampling using sharpness + entropy scoring,
-            <b>(b)</b> VAD-filtered ASR for clean dialogue extraction,
-            <b>(c)</b> Multi-agent narrative distillation (Qwen3-32B + Gemini 3.1) for verified summaries,
-            <b>(d)</b> Unified multimodal representation for cross-video semantic reasoning.
-          </p>
-        </div>
-
-        <!-- Pipeline Steps -->
-        <div class="columns is-multiline" style="margin-top: 30px;">
-          <div class="column is-3">
-            <div class="pipeline-step">
-              <h4>Keyframe Sampling</h4>
-              <p style="font-size: 0.85em;">Joint sharpness-entropy scoring to select top-k informative frames</p>
-            </div>
-          </div>
-          <div class="column is-3">
-            <div class="pipeline-step">
-              <h4>ASR + VAD Filter</h4>
-              <p style="font-size: 0.85em;">Voice Activity Detection removes BGM noise before transcription</p>
-            </div>
-          </div>
-          <div class="column is-3">
-            <div class="pipeline-step">
-              <h4>Multi-Agent Distillation</h4>
-              <p style="font-size: 0.85em;">Iterative summarization + verification with quality criteria</p>
-            </div>
-          </div>
-          <div class="column is-3">
-            <div class="pipeline-step">
-              <h4>Unified Representation</h4>
-              <p style="font-size: 0.85em;">Keyframes + transcripts + summaries + metadata per segment</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Dataset Statistics -->
-        <h2 class="title is-3" style="margin-top: 40px;"><span style="color:#2c3e50;">Dataset</span> <span style="color:#c49a6c;">Statistics</span></h2>
-
-        <!-- Stat Cards -->
-        <div class="columns is-multiline" style="margin-bottom: 30px;">
-          <div class="column is-one-fifth">
-            <div class="stat-card">
-              <div class="stat-number">250K+</div>
-              <div class="stat-label">Video Pairs</div>
-            </div>
-          </div>
-          <div class="column is-one-fifth">
-            <div class="stat-card">
-              <div class="stat-number">5</div>
-              <div class="stat-label">Data Splits</div>
-            </div>
-          </div>
-          <div class="column is-one-fifth">
-            <div class="stat-card">
-              <div class="stat-number">294</div>
-              <div class="stat-label">Avg. UGC Works</div>
-            </div>
-          </div>
-          <div class="column is-one-fifth">
-            <div class="stat-card">
-              <div class="stat-number">2.4</div>
-              <div class="stat-label">Avg. Continuations (UGC)</div>
-            </div>
-          </div>
-          <div class="column is-one-fifth">
-            <div class="stat-card">
-              <div class="stat-number">3</div>
-              <div class="stat-label">Modalities</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Statistics Table -->
-        <div style="overflow-x: auto; margin-bottom: 30px;">
-          <table class="results-table">
-            <thead>
-              <tr>
-                <th>Split</th>
-                <th>Train</th>
-                <th>Eval</th>
-                <th>UGC</th>
-                <th>PGC</th>
-                <th>OOD</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><b>Pairs</b></td>
-                <td>241,545</td><td>14,231</td><td>11,175</td><td>1,613</td><td>1,443</td>
-              </tr>
-              <tr>
-                <td><b>Texts</b></td>
-                <td>268</td><td>247</td><td>294</td><td>76</td><td>78</td>
-              </tr>
-              <tr>
-                <td><b>Duration (s)</b></td>
-                <td>474</td><td>431</td><td>533</td><td>58</td><td>60</td>
-              </tr>
-              <tr>
-                <td><b>Segments</b></td>
-                <td>8.7</td><td>8.1</td><td>9.6</td><td>2.6</td><td>2.7</td>
-              </tr>
-              <tr>
-                <td><b>Continuations</b></td>
-                <td>2.2</td><td>2.1</td><td>2.4</td><td>1</td><td>1</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="content has-text-justified" style="max-width: 80%; margin: 0 auto;">
-          <p>
-            The dataset spans five splits: <b>Train</b>, <b>Eval</b>, and three test sets &mdash;
-            <b>UGC</b> (user-generated, high narrative density with multi-path continuations),
-            <b>PGC</b> (professional, concise linear progression), and
-            <b>OOD</b> (out-of-distribution, concluding episodes testing narrative ending prediction).
-          </p>
-        </div>
-
-        <!-- Data Case -->
-        <h2 class="title is-3" style="margin-top: 40px;"><span style="color:#2c3e50;">Data</span> <span style="color:#c49a6c;">Sample</span></h2>
-        <div class="content has-text-centered">
-          <img src="static/images/exp_results/case_study.png" alt="Data Case" style="max-width: 60%; border-radius: 8px;"/>
-          <p style="text-align: center; margin-top: 12px; color: #666;">
-            An illustrative sample from MM-SFD: source video context (keyframes, transcripts, summaries) aligned with the ground-truth target segment for narrative continuation.
-          </p>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ====== BENCHMARK SECTION ====== -->
-<hr class="section-divider">
-<section class="hero is-light is-small">
-  <div class="hero-body has-text-centered">
-    <h1 class="title is-1" id="benchmark"><span style="color:#2c3e50;">Benchmark</span> <span style="color:#c49a6c;">Results</span></h1>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container">
-    <div class="columns is-centered">
-      <div class="column is-full has-text-centered content">
-
-        <h2 class="title is-3"><span style="color:#2c3e50;">Main Results:</span> <span style="color:#c49a6c;">Hits@K</span></h2>
-        <p style="margin-bottom: 20px; color: #666;">Performance comparison of retrieval and generative models across test splits</p>
-
-        <div style="background: #f8f6f3; border-left: 4px solid #c49a6c; padding: 14px 20px; border-radius: 0 8px 8px 0; margin-bottom: 24px; text-align: left;">
-          📧 <b>Submit your results</b>: Send your model outputs to <a href="mailto:mmsfd-benchmark@gmail.com">mmsfd-benchmark@gmail.com</a> — we will evaluate and add to the leaderboard.
-        </div>
-
-        <div style="width: 100%; overflow-x: auto; margin-bottom: 40px;">
-          <table class="results-table">
-            <thead>
-              <tr>
-                <th rowspan="2" style="vertical-align: middle;">Method</th>
-                <th colspan="4">Eval</th>
-                <th colspan="4">UGC</th>
-                <th colspan="4">PGC</th>
-                <th colspan="4">OOD</th>
-              </tr>
-              <tr>
-                <th>H@1</th><th>H@3</th><th>H@5</th><th>H@10</th>
-                <th>H@1</th><th>H@3</th><th>H@5</th><th>H@10</th>
-                <th>H@1</th><th>H@3</th><th>H@5</th><th>H@10</th>
-                <th>H@1</th><th>H@3</th><th>H@5</th><th>H@10</th>
-              </tr>
-            </thead>
-            <tbody>
-              <!-- Retrieval Header -->
-              <tr class="row-header-retrieval">
-                <td style="text-align: left;"><b><em>Retrieval</em></b> <span class="method-tag tag-retrieval">Retrieval</span></td>
-                <td colspan="16"></td>
-              </tr>
-              <tr class="row-retrieval">
-                <td style="text-align: left;">BM25</td>
-                <td>0.072</td><td>0.129</td><td>0.159</td><td>0.202</td>
-                <td>0.086</td><td>0.154</td><td>0.189</td><td>0.239</td>
-                <td>0.021</td><td>0.042</td><td>0.050</td><td>0.074</td>
-                <td>0.015</td><td>0.031</td><td>0.042</td><td>0.058</td>
-              </tr>
-              <tr class="row-retrieval">
-                <td style="text-align: left;">Visual DR</td>
-                <td>-</td><td>-</td><td>-</td><td>-</td>
-                <td>-</td><td>-</td><td>-</td><td>-</td>
-                <td>-</td><td>-</td><td>-</td><td>-</td>
-                <td>-</td><td>-</td><td>-</td><td>-</td>
-              </tr>
-              <tr class="row-retrieval">
-                <td style="text-align: left;">Textual DR</td>
-                <td>-</td><td>-</td><td>-</td><td>-</td>
-                <td>-</td><td>-</td><td>-</td><td>-</td>
-                <td>-</td><td>-</td><td>-</td><td>-</td>
-                <td>-</td><td>-</td><td>-</td><td>-</td>
-              </tr>
-              <tr class="row-retrieval">
-                <td style="text-align: left;">Multimodal DR</td>
-                <td>-</td><td>-</td><td>-</td><td>-</td>
-                <td>-</td><td>-</td><td>-</td><td>-</td>
-                <td>-</td><td>-</td><td>-</td><td>-</td>
-                <td>-</td><td>-</td><td>-</td><td>-</td>
-              </tr>
-
-              <!-- Generative Header -->
-              <tr class="row-header-generative">
-                <td style="text-align: left;"><b><em>Generative</em></b> <span class="method-tag tag-generative">Generative</span></td>
-                <td colspan="16"></td>
-              </tr>
-              <tr class="row-generative">
-                <td style="text-align: left;">Visual GR</td>
-                <td>-</td><td>-</td><td>-</td><td>-</td>
-                <td>-</td><td>-</td><td>-</td><td>-</td>
-                <td>-</td><td>-</td><td>-</td><td>-</td>
-                <td>-</td><td>-</td><td>-</td><td>-</td>
-              </tr>
-              <tr class="row-generative">
-                <td style="text-align: left;"><b>Textual GR</b></td>
-                <td><b>0.233</b></td><td><b>0.341</b></td><td><b>0.384</b></td><td><b>0.437</b></td>
-                <td><b>0.249</b></td><td><b>0.376</b></td><td><b>0.428</b></td><td><b>0.490</b></td>
-                <td><b>0.206</b></td><td><b>0.249</b></td><td><b>0.265</b></td><td><b>0.293</b></td>
-                <td><b>0.140</b></td><td><b>0.171</b></td><td><b>0.177</b></td><td><b>0.191</b></td>
-              </tr>
-              <tr class="row-generative">
-                <td style="text-align: left;">Multimodal GR</td>
-                <td>-</td><td>-</td><td>-</td><td>-</td>
-                <td>-</td><td>-</td><td>-</td><td>-</td>
-                <td>-</td><td>-</td><td>-</td><td>-</td>
-                <td>-</td><td>-</td><td>-</td><td>-</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <!-- Key Findings -->
-        <h2 class="title is-3"><span style="color:#2c3e50;">Key</span> <span style="color:#c49a6c;">Findings</span></h2>
-        <div class="content has-text-justified" style="max-width: 80%; margin: 0 auto;">
-          <div class="insight-box">
-            <b>Generative &gt; Retrieval:</b> GR models consistently outperform all retrieval baselines across all splits. By mapping segments into a discrete hierarchical codebook space, GR captures abstract narrative logic rather than raw feature similarities.
-          </div>
-          <div class="insight-box">
-            <b>Multimodal Synergy:</b> Multimodal GR outperforms unimodal counterparts &mdash; visual features provide fine-grained continuity (character persistence), while textual summaries offer high-level semantic "anchors" bridging drastic scene cuts.
-          </div>
-          <div class="insight-box">
-            <b>Narrative Coherence:</b> Even on "soft misses" (wrong segment ID), GR methods maintain high Narrative Consistency scores, indicating predictions remain semantically proximal to the true continuation.
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ====== ANALYSIS SECTION ====== -->
-<hr class="section-divider">
-<section class="hero is-light is-small">
-  <div class="hero-body has-text-centered">
-    <h1 class="title is-1">Analysis</h1>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-
-        <!-- t-SNE Visualization -->
-        <h2 class="title is-3"><span style="color:#2c3e50;">Latent Space</span> <span style="color:#c49a6c;">Analysis</span></h2>
-        <div class="columns">
-          <div class="column is-half">
-            <div class="content has-text-centered">
-              <img src="static/images/exp_results/tsne_pre_segments.png" alt="t-SNE UGC" style="max-width: 100%; border-radius: 8px;"/>
-              <p><b>UGC Segments:</b> Entangled distribution reflecting weak narrative structure and multi-path continuations</p>
-            </div>
-          </div>
-          <div class="column is-half">
-            <div class="content has-text-centered">
-              <img src="static/images/exp_results/tsne_yuansheng_segments.png" alt="t-SNE PGC" style="max-width: 100%; border-radius: 8px;"/>
-              <p><b>PGC Segments:</b> Well-separated clusters with clear narrative progression trajectories</p>
-            </div>
-          </div>
-        </div>
-        <div class="content has-text-justified" style="max-width: 80%; margin: 20px auto;">
-          <p>
-            The t-SNE visualization reveals a fundamental structural contrast: UGC segments collapse into a homogeneous cloud, while PGC segments form fine-grained clusters with distinct semantic "leaps" between narrative phases. This highlights that accurate continuation in PGC requires capturing logical plot shifts beyond visual similarity.
-          </p>
-        </div>
-
-        <!-- Overlap Sensitivity -->
-        <h2 class="title is-3" style="margin-top: 40px;"><span style="color:#2c3e50;">Overlap Sensitivity</span> <span style="color:#c49a6c;">Analysis</span></h2>
-        <div class="content has-text-justified" style="max-width: 80%; margin: 0 auto;">
-          <p>
-            To examine whether models rely on <b>"visual shortcuts"</b> or genuine narrative understanding, we partition test samples into bins by Overlap Ratio:
-          </p>
-          <ul>
-            <li><b>Visual Retrieval</b> performs well only in high-overlap bins (R &gt; 0.4), collapsing when segments are visually disjoint &mdash; revealing pixel-level dependency.</li>
-            <li><b>Multimodal GR</b> maintains robust performance even in zero-overlap scenarios, confirming it has internalized the "grammar" of narrative storytelling.</li>
-          </ul>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ====== CITATION ====== -->
-<section class="section" id="BibTeX" style="background-color: #f8f9fa;">
-  <div class="container is-max-desktop content">
-    <h2 class="title is-3 has-text-centered">Citation</h2>
-    <pre><code>@inproceedings{mmsfd2026,
-  title={Towards Narrative-Aware Recommendation: A Multimodal Dataset for Short-Form Dramas},
-  author={...},
-  booktitle={ACM International Conference on Multimedia (MM '26)},
-  year={2026}
-}</code></pre>
-  </div>
-</section>
-
-
-<!-- ====== FOOTER ====== -->
-<footer class="footer">
-  <div class="columns is-centered">
-    <div class="column is-8">
-      <div class="content">
-        <p style="text-align: center;">
-          This website is adapted from <a href="https://mathvista.github.io/">MathVista</a> and <a href="https://video-mme.github.io/">Video-MME</a>, licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
-        </p>
-      </div>
-    </div>
-  </div>
-</footer>
+    // 5. Click prompt breathes in
+    gsap.to('.please-click', {
+      opacity: 1, duration: 1.2, delay: 3.8,
+      ease: "power1.inOut"
+    });
+  </script>
 
 </body>
 </html>
