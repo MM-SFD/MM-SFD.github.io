@@ -87,8 +87,8 @@
       font-size: 14px;
     }
     table.results-table th {
-      background-color: #2c3e50;
-      color: white;
+      background-color: #2c3e50 !important;
+      color: white !important;
       padding: 10px 8px;
       text-align: center;
     }
@@ -141,6 +141,20 @@
             A Multimodal Dataset for Short-Form Dramas
           </h2>
 
+          <div class="is-size-5 publication-authors" style="margin-bottom: 8px;">
+            <span class="author-block">Nantao Zheng<sup>&dagger;</sup>, </span>
+            <span class="author-block">Yuchen Fang<sup>&dagger;*</sup>, </span>
+            <span class="author-block">Juyuan Wang, </span>
+            <span class="author-block">Aolin Li, </span>
+            <span class="author-block">Haijun Wu, </span>
+            <span class="author-block">Chenxing Wang<sup>*</sup></span>
+          </div>
+          <div class="is-size-6 publication-authors" style="margin-bottom: 6px;">
+            <span class="author-block">Weixin Group, Tencent</span>
+          </div>
+          <div class="is-size-7 publication-authors" style="margin-bottom: 8px; color: #888;">
+            <span><sup>&dagger;</sup> Equal contribution &nbsp;&nbsp; <sup>*</sup> Corresponding author</span>
+          </div>
           <div class="is-size-5 publication-authors" style="margin-bottom: 20px;">
             <span class="author-block">ACM Multimedia 2026</span>
           </div>
@@ -459,31 +473,31 @@
               </tr>
               <tr class="row-retrieval">
                 <td style="text-align: left;">BM25</td>
-                <td>0.072</td><td>0.129</td><td>0.159</td><td>0.202</td>
-                <td>0.086</td><td>0.154</td><td>0.189</td><td>0.239</td>
-                <td>0.021</td><td>0.042</td><td>0.050</td><td>0.074</td>
-                <td>0.015</td><td>0.031</td><td>0.042</td><td>0.058</td>
+                <td>0.0715</td><td>0.1285</td><td>0.1585</td><td>0.2022</td>
+                <td><b>0.0862</b></td><td>0.1536</td><td>0.1893</td><td>0.2394</td>
+                <td>0.0211</td><td>0.0415</td><td>0.0496</td><td>0.0738</td>
+                <td>0.0146</td><td>0.0312</td><td>0.0416</td><td>0.0575</td>
               </tr>
               <tr class="row-retrieval">
                 <td style="text-align: left;">Visual DR</td>
-                <td>-</td><td>-</td><td>-</td><td>-</td>
-                <td>-</td><td>-</td><td>-</td><td>-</td>
-                <td>-</td><td>-</td><td>-</td><td>-</td>
-                <td>-</td><td>-</td><td>-</td><td>-</td>
+                <td>0.0472</td><td>0.0777</td><td>0.0955</td><td>0.1195</td>
+                <td>0.0476</td><td>0.0787</td><td>0.0970</td><td>0.1216</td>
+                <td>0.0421</td><td>0.0709</td><td>0.0840</td><td>0.1093</td>
+                <td>0.0502</td><td>0.0793</td><td>0.0997</td><td>0.1195</td>
               </tr>
               <tr class="row-retrieval">
                 <td style="text-align: left;">Textual DR</td>
-                <td>-</td><td>-</td><td>-</td><td>-</td>
-                <td>-</td><td>-</td><td>-</td><td>-</td>
-                <td>-</td><td>-</td><td>-</td><td>-</td>
-                <td>-</td><td>-</td><td>-</td><td>-</td>
+                <td>0.0656</td><td>0.1226</td><td>0.1559</td><td>0.1999</td>
+                <td>0.0804</td><td>0.1445</td><td>0.1809</td><td>0.2249</td>
+                <td>0.0440</td><td>0.0986</td><td>0.1283</td><td>0.1742</td>
+                <td>0.0326</td><td>0.0651</td><td>0.0908</td><td>0.1324</td>
               </tr>
               <tr class="row-retrieval">
                 <td style="text-align: left;">Multimodal DR</td>
-                <td>-</td><td>-</td><td>-</td><td>-</td>
-                <td>-</td><td>-</td><td>-</td><td>-</td>
-                <td>-</td><td>-</td><td>-</td><td>-</td>
-                <td>-</td><td>-</td><td>-</td><td>-</td>
+                <td><b>0.0860</b></td><td><b>0.1655</b></td><td><b>0.2053</b></td><td><b>0.2569</b></td>
+                <td>0.0854</td><td><b>0.1662</b></td><td><b>0.2067</b></td><td><b>0.2586</b></td>
+                <td><b>0.0818</b></td><td><b>0.1426</b></td><td><b>0.1782</b></td><td><b>0.2495</b></td>
+                <td><b>0.0987</b></td><td><b>0.1798</b></td><td><b>0.2149</b></td><td><b>0.2412</b></td>
               </tr>
 
               <!-- Generative Header -->
@@ -493,24 +507,82 @@
               </tr>
               <tr class="row-generative">
                 <td style="text-align: left;">Visual GR</td>
-                <td>-</td><td>-</td><td>-</td><td>-</td>
-                <td>-</td><td>-</td><td>-</td><td>-</td>
-                <td>-</td><td>-</td><td>-</td><td>-</td>
-                <td>-</td><td>-</td><td>-</td><td>-</td>
+                <td>0.2154</td><td>0.3059</td><td>0.3427</td><td>0.3846</td>
+                <td>0.2263</td><td>0.3353</td><td>0.3803</td><td>0.4339</td>
+                <td><b>0.2064</b></td><td>0.2362</td><td>0.2399</td><td>0.2505</td>
+                <td><b>0.1407</b></td><td>0.1559</td><td>0.1663</td><td>0.1705</td>
               </tr>
               <tr class="row-generative">
-                <td style="text-align: left;"><b>Textual GR</b></td>
-                <td><b>0.233</b></td><td><b>0.341</b></td><td><b>0.384</b></td><td><b>0.437</b></td>
-                <td><b>0.249</b></td><td><b>0.376</b></td><td><b>0.428</b></td><td><b>0.490</b></td>
-                <td><b>0.206</b></td><td><b>0.249</b></td><td><b>0.265</b></td><td><b>0.293</b></td>
-                <td><b>0.140</b></td><td><b>0.171</b></td><td><b>0.177</b></td><td><b>0.191</b></td>
+                <td style="text-align: left;">Textual GR</td>
+                <td><b>0.2329</b></td><td><b>0.3408</b></td><td><b>0.3844</b></td><td>0.4373</td>
+                <td><b>0.2487</b></td><td><b>0.3761</b></td><td><b>0.4284</b></td><td>0.4900</td>
+                <td><b>0.2064</b></td><td><b>0.2486</b></td><td><b>0.2647</b></td><td><b>0.2926</b></td>
+                <td>0.1400</td><td><b>0.1705</b></td><td><b>0.1774</b></td><td>0.1913</td>
               </tr>
               <tr class="row-generative">
                 <td style="text-align: left;">Multimodal GR</td>
-                <td>-</td><td>-</td><td>-</td><td>-</td>
-                <td>-</td><td>-</td><td>-</td><td>-</td>
-                <td>-</td><td>-</td><td>-</td><td>-</td>
-                <td>-</td><td>-</td><td>-</td><td>-</td>
+                <td>0.2286</td><td>0.3375</td><td>0.3834</td><td><b>0.4389</b></td>
+                <td>0.2452</td><td>0.3737</td><td>0.4279</td><td><b>0.4930</b></td>
+                <td>0.2009</td><td>0.2480</td><td>0.2610</td><td>0.2821</td>
+                <td>0.1310</td><td>0.1573</td><td>0.1753</td><td><b>0.1954</b></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- WSC Table -->
+        <h2 class="title is-3"><span style="color:#2c3e50;">Overlap-Weighted Semantic Coherence</span> <span style="color:#c49a6c;">(WSC)</span></h2>
+        <p style="margin-bottom: 20px; color: #666;">Higher scores indicate better intrinsic narrative progression and stronger resilience to low visual overlap</p>
+
+        <div style="width: 100%; overflow-x: auto; margin-bottom: 40px;">
+          <table class="results-table">
+            <thead>
+              <tr>
+                <th>Method</th>
+                <th>Eval</th>
+                <th>UGC</th>
+                <th>PGC</th>
+                <th>OOD</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Retrieval Header -->
+              <tr class="row-header-retrieval">
+                <td style="text-align: left;"><b><em>Retrieval</em></b> <span class="method-tag tag-retrieval">Retrieval</span></td>
+                <td colspan="4"></td>
+              </tr>
+              <tr class="row-retrieval">
+                <td style="text-align: left;">BM25</td>
+                <td>0.1845</td><td>0.2212</td><td>0.1425</td><td>0.1132</td>
+              </tr>
+              <tr class="row-retrieval">
+                <td style="text-align: left;">Visual DR</td>
+                <td>0.2678</td><td>0.3145</td><td>0.1984</td><td>0.1675</td>
+              </tr>
+              <tr class="row-retrieval">
+                <td style="text-align: left;">Textual DR</td>
+                <td>0.2945</td><td>0.3428</td><td>0.2412</td><td>0.2014</td>
+              </tr>
+              <tr class="row-retrieval">
+                <td style="text-align: left;">Multimodal DR</td>
+                <td><b>0.3512</b></td><td><b>0.3965</b></td><td><b>0.2835</b></td><td><b>0.2584</b></td>
+              </tr>
+              <!-- Generative Header -->
+              <tr class="row-header-generative">
+                <td style="text-align: left;"><b><em>Generative</em></b> <span class="method-tag tag-generative">Generative</span></td>
+                <td colspan="4"></td>
+              </tr>
+              <tr class="row-generative">
+                <td style="text-align: left;">Visual GR</td>
+                <td>0.5228</td><td>0.6165</td><td>0.4851</td><td>0.4741</td>
+              </tr>
+              <tr class="row-generative">
+                <td style="text-align: left;">Textual GR</td>
+                <td>0.5431</td><td>0.6318</td><td><b>0.5104</b></td><td>0.4936</td>
+              </tr>
+              <tr class="row-generative">
+                <td style="text-align: left;">Multimodal GR</td>
+                <td><b>0.5434</b></td><td><b>0.6326</b></td><td>0.5099</td><td><b>0.4946</b></td>
               </tr>
             </tbody>
           </table>
@@ -520,13 +592,13 @@
         <h2 class="title is-3"><span style="color:#2c3e50;">Key</span> <span style="color:#c49a6c;">Findings</span></h2>
         <div class="content has-text-justified" style="max-width: 80%; margin: 0 auto;">
           <div class="insight-box">
-            <b>Generative &gt; Retrieval:</b> GR models consistently outperform all retrieval baselines across all splits. By mapping segments into a discrete hierarchical codebook space, GR captures abstract narrative logic rather than raw feature similarities.
+            <b>Generative &gt;&gt; Retrieval:</b> GR models vastly outperform all retrieval baselines. On UGC, Multimodal GR achieves H@10 = 0.4930 vs. Multimodal DR's 0.2586 (<b>+90.6%</b>). By mapping segments into a discrete hierarchical codebook space, GR captures abstract narrative logic rather than raw feature similarities.
           </div>
           <div class="insight-box">
-            <b>Multimodal Synergy:</b> Multimodal GR outperforms unimodal counterparts &mdash; visual features provide fine-grained continuity (character persistence), while textual summaries offer high-level semantic "anchors" bridging drastic scene cuts.
+            <b>Multimodal Synergy &amp; Tension:</b> In the retrieval paradigm, Multimodal DR dominates all splits, confirming strong cross-modal synergy. However, in the generative paradigm, <em>Textual GR</em> slightly outperforms Multimodal GR on PGC (H@10: 0.2926 vs. 0.2821), suggesting that for professionally structured content, textual plot logic alone can surpass vision-augmented signals.
           </div>
           <div class="insight-box">
-            <b>Narrative Coherence:</b> Even on "soft misses" (wrong segment ID), GR methods maintain high Narrative Consistency scores, indicating predictions remain semantically proximal to the true continuation.
+            <b>Narrative Coherence (WSC):</b> GR methods far exceed retrieval on WSC &mdash; UGC: 0.6326 vs. 0.3965 (<b>+59.6%</b>). This means even on "soft misses" (wrong segment ID), GR predictions remain semantically proximal to the true continuation, maintaining narrative coherence.
           </div>
         </div>
 
@@ -593,10 +665,10 @@
 <section class="section" id="BibTeX" style="background-color: #f8f9fa;">
   <div class="container is-max-desktop content">
     <h2 class="title is-3 has-text-centered">Citation</h2>
-    <pre><code>@inproceedings{mmsfd2026,
+    <pre><code>@article{zheng2026mmsfd,
   title={Towards Narrative-Aware Recommendation: A Multimodal Dataset for Short-Form Dramas},
-  author={...},
-  booktitle={ACM International Conference on Multimedia (MM '26)},
+  author={Zheng, Nantao and Fang, Yuchen and Wang, Juyuan and Li, Aolin and Wu, Haijun and Wang, Chenxing},
+  journal={arXiv preprint},
   year={2026}
 }</code></pre>
   </div>
@@ -615,164 +687,6 @@
     </div>
   </div>
 </footer>
-
-<!-- GSAP + ScrollTrigger -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  gsap.registerPlugin(ScrollTrigger);
-
-  // Hero entrance animation
-  gsap.from('.hero .publication-title', {
-    opacity: 0, y: -40, duration: 1, ease: 'power2.out'
-  });
-  gsap.from('.hero .publication-subtitle', {
-    opacity: 0, y: 30, duration: 1, delay: 0.3, ease: 'power2.out'
-  });
-  gsap.from('.hero .publication-authors', {
-    opacity: 0, y: 20, duration: 0.8, delay: 0.5, ease: 'power2.out'
-  });
-  gsap.from('.hero .publication-links .link-block', {
-    opacity: 0, y: 20, duration: 0.6, delay: 0.7, stagger: 0.15, ease: 'power2.out'
-  });
-
-  // All sections fade up on scroll
-  gsap.utils.toArray('section:not(.hero)').forEach(function(section) {
-    gsap.from(section, {
-      scrollTrigger: {
-        trigger: section,
-        start: 'top 85%',
-        toggleActions: 'play none none none'
-      },
-      opacity: 0,
-      y: 50,
-      duration: 0.8,
-      ease: 'power2.out'
-    });
-  });
-
-  // Contribution boxes stagger in
-  gsap.from('.contribution-box', {
-    scrollTrigger: {
-      trigger: '.contribution-box',
-      start: 'top 85%',
-      toggleActions: 'play none none none'
-    },
-    opacity: 0,
-    x: -40,
-    duration: 0.6,
-    stagger: 0.2,
-    ease: 'power2.out'
-  });
-
-  // Pipeline steps stagger in
-  gsap.from('.pipeline-step', {
-    scrollTrigger: {
-      trigger: '.pipeline-step',
-      start: 'top 85%',
-      toggleActions: 'play none none none'
-    },
-    opacity: 0,
-    y: 40,
-    duration: 0.6,
-    stagger: 0.15,
-    ease: 'power2.out'
-  });
-
-  // Stat cards pop in
-  gsap.from('.stat-card', {
-    scrollTrigger: {
-      trigger: '.stat-card',
-      start: 'top 85%',
-      toggleActions: 'play none none none'
-    },
-    opacity: 0,
-    scale: 0.8,
-    duration: 0.5,
-    stagger: 0.1,
-    ease: 'back.out(1.5)'
-  });
-
-  // Insight boxes slide in from right
-  gsap.from('.insight-box', {
-    scrollTrigger: {
-      trigger: '.insight-box',
-      start: 'top 85%',
-      toggleActions: 'play none none none'
-    },
-    opacity: 0,
-    x: 40,
-    duration: 0.6,
-    stagger: 0.2,
-    ease: 'power2.out'
-  });
-
-  // Tables fade in
-  gsap.from('.results-table', {
-    scrollTrigger: {
-      trigger: '.results-table',
-      start: 'top 85%',
-      toggleActions: 'play none none none'
-    },
-    opacity: 0,
-    y: 30,
-    duration: 0.8,
-    ease: 'power2.out'
-  });
-
-  // Images scale up
-  gsap.utils.toArray('img').forEach(function(img) {
-    gsap.from(img, {
-      scrollTrigger: {
-        trigger: img,
-        start: 'top 85%',
-        toggleActions: 'play none none none'
-      },
-      opacity: 0,
-      scale: 0.95,
-      duration: 0.8,
-      ease: 'power2.out'
-    });
-  });
-
-  // Section dividers wipe in
-  gsap.utils.toArray('.section-divider').forEach(function(div) {
-    gsap.from(div, {
-      scrollTrigger: {
-        trigger: div,
-        start: 'top 90%',
-        toggleActions: 'play none none none'
-      },
-      scaleX: 0,
-      transformOrigin: 'left center',
-      duration: 0.8,
-      ease: 'power2.inOut'
-    });
-  });
-
-  // t-SNE columns slide in from sides
-  var tsneColumns = document.querySelectorAll('.columns .column.is-half');
-  if (tsneColumns.length >= 2) {
-    gsap.from(tsneColumns[0], {
-      scrollTrigger: {
-        trigger: tsneColumns[0],
-        start: 'top 85%',
-        toggleActions: 'play none none none'
-      },
-      opacity: 0, x: -50, duration: 0.8, ease: 'power2.out'
-    });
-    gsap.from(tsneColumns[1], {
-      scrollTrigger: {
-        trigger: tsneColumns[1],
-        start: 'top 85%',
-        toggleActions: 'play none none none'
-      },
-      opacity: 0, x: 50, duration: 0.8, ease: 'power2.out'
-    });
-  }
-});
-</script>
 
 </body>
 </html>
